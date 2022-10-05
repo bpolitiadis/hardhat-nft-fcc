@@ -4,8 +4,9 @@ coverage
 coverage.json
 typechain
 typechain-types
+gas-report.txt
 
 #Hardhat files
 cache
 artifacts
-deployments*
+deployments
