@@ -6,9 +6,9 @@ const { storeImages, storeTokenUriMetadata } = require("../utils/uploadToPinata"
 const FUND_AMOUNT = "1000000000000000000000";
 const imagesLocation = "./images/randomNft/";
 let tokenUris = [
-    "ipfs://QmRzEhU9K1z4NL6f7gAC31jZjP1Z6AuNh2Cr6fE6GVR7VV",  //LEGENDARY
-    "ipfs://QmWiweYjjkAcuYHKMUd1XUWv7U2dpeas9oFo5zFfiRX8Vt",  //RARE
-    "ipfs://QmaAffXgFCFQkKa2Kc37KnxpJKJoUqEYg31i984dAaw1Vz",  //COMMON
+    "ipfs://QmRzEhU9K1z4NL6f7gAC31jZjP1Z6AuNh2Cr6fE6GVR7VV", //LEGENDARY
+    "ipfs://QmWiweYjjkAcuYHKMUd1XUWv7U2dpeas9oFo5zFfiRX8Vt", //RARE
+    "ipfs://QmaAffXgFCFQkKa2Kc37KnxpJKJoUqEYg31i984dAaw1Vz", //COMMON
 ];
 // const imageUris = [
 //     "ipfs://QmRbsGs2bJ7ickKe6Gd8wM5oV1soEKBtZh5aQgtpvQSGG7",  //LEGENDARY
@@ -50,6 +50,9 @@ module.exports = async ({ getNamedAccounts, deployments, ethers, network }) => {
         vrfCoordinatorV2Address = networkConfig[chainId].vrfCoordinatorV2;
         subscriptionId = networkConfig[chainId].subscriptionId;
     }
+    console.log(subscriptionId);
+    console.log(subscriptionId.toNumber());
+    console.log(subscriptionId.toString());
 
     log("----------------------------------------------------");
     arguments = [
@@ -67,6 +70,13 @@ module.exports = async ({ getNamedAccounts, deployments, ethers, network }) => {
         waitConfirmations: network.config.blockConfirmations || 1,
     });
 
+    if (chainId == 31337) {
+        const vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock");
+        await vrfCoordinatorV2Mock.addConsumer(subscriptionId.toNumber(), randomIpfsNft.address)
+        log("adding consumer...")
+        log("Consumer added!")
+    }
+
     // Verify the deployment
     if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log("Verifying...");
@@ -80,29 +90,33 @@ async function handleTokenUris() {
     const { responses: imageUploadResponses, files } = await storeImages(imagesLocation);
     for (imageUploadResponseIndex in imageUploadResponses) {
         let tokenUriMetadata = { ...metadataTemplate };
-        if (files[imageUploadResponseIndex].includes("legendary")){
+        if (files[imageUploadResponseIndex].includes("legendary")) {
             tokenUriMetadata.name = "Aura (Legendary)";
             tokenUriMetadata.description = `An adorable Legendary Aura!`;
-            tokenUriMetadata.attributes = [{
-                trait_type: "Cuteness",
-                value: 100,
-            }]
-        }
-        else if (files[imageUploadResponseIndex].includes("rare")){
+            tokenUriMetadata.attributes = [
+                {
+                    trait_type: "Cuteness",
+                    value: 100,
+                },
+            ];
+        } else if (files[imageUploadResponseIndex].includes("rare")) {
             tokenUriMetadata.name = "Aura (Rare)";
             tokenUriMetadata.description = `An adorable Rare Aura!`;
-            tokenUriMetadata.attributes = [{
-                trait_type: "Cuteness",
-                value: 85,
-            }]
-        }
-        else {
+            tokenUriMetadata.attributes = [
+                {
+                    trait_type: "Cuteness",
+                    value: 85,
+                },
+            ];
+        } else {
             tokenUriMetadata.name = "Aura (Common)";
             tokenUriMetadata.description = `An adorable Common Aura!`;
-            tokenUriMetadata.attributes = [{
-                trait_type: "Cuteness",
-                value: 65,
-            }]
+            tokenUriMetadata.attributes = [
+                {
+                    trait_type: "Cuteness",
+                    value: 65,
+                },
+            ];
         }
 
         tokenUriMetadata.image = `ipfs://${imageUploadResponses[imageUploadResponseIndex].IpfsHash}`;
