@@ -1,0 +1,11 @@
+{
+    "name": "Aura (Rare)",
+    "description": "An adorable RARE Aura",
+    "image": "ipfs://QmW45uZSgjB1uWi112juqqiYwwyuDk2Auexjjn5xLf7xb7",
+    "attributes": [
+        {
+            "trait_type": "Cuteness",
+            "value": 85
+        }
+    ]
+}

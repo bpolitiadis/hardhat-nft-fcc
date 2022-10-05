@@ -1,0 +1,11 @@
+{
+    "name": "Aura (Legendary)",
+    "description": "An adorable LEGENDARY Aura",
+    "image": "ipfs://QmRbsGs2bJ7ickKe6Gd8wM5oV1soEKBtZh5aQgtpvQSGG7",
+    "attributes": [
+        {
+            "trait_type": "Cuteness",
+            "value": 100
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "name": "Aura (Common)",
+    "description": "An adorable COMMON Aura",
+    "image": "ipfs://QmQqXYuFWBdtRJyEE373yuv1tXpRu5NLgvvPt93BtsQANp",
+    "attributes": [
+        {
+            "trait_type": "Cuteness",
+            "value": 65
+        }
+    ]
+}
