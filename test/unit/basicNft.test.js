@@ -15,11 +15,12 @@ const { developmentChains } = require("../../helper-hardhat-config");
           });
 
           //test01
-          describe("Construtor", () => {
+          describe("Constructor", () => {
               it("Initilizes the NFT Correctly.", async () => {
                   const name = await basicNft.name();
                   const symbol = await basicNft.symbol();
                   const tokenCounter = await basicNft.getTokenCounter();
+
                   assert.equal(name, "Pixel");
                   assert.equal(symbol, "PXL");
                   assert.equal(tokenCounter.toString(), "0");
