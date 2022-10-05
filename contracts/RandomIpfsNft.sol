@@ -8,8 +8,8 @@ import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "hardhat/console.sol";
 
 error AlreadyInitialized();
-error NeedMoreETHSent();
-error RangeOutOfBounds();
+error RandomIpfsNft__NeedMoreETHSent();
+error RandomIpfsNft__RangeOutOfBounds();
 error RandomIpfsNft__TransferFailed();
 
 contract RandomIpfsNft is ERC721URIStorage, VRFConsumerBaseV2, Ownable {
@@ -49,7 +49,7 @@ contract RandomIpfsNft is ERC721URIStorage, VRFConsumerBaseV2, Ownable {
         uint256 mintFee,
         uint32 callbackGasLimit,
         string[3] memory dogTokenUris
-    ) VRFConsumerBaseV2(vrfCoordinatorV2) ERC721("Aura NFT", "AVRA") {
+    ) VRFConsumerBaseV2(vrfCoordinatorV2) ERC721("Aura NFT", "AURA") {
         i_vrfCoordinator = VRFCoordinatorV2Interface(vrfCoordinatorV2);
         i_gasLane = gasLane;
         i_subscriptionId = subscriptionId;
@@ -60,7 +60,7 @@ contract RandomIpfsNft is ERC721URIStorage, VRFConsumerBaseV2, Ownable {
 
     function requestNft() public payable returns (uint256 requestId) {
         if (msg.value < i_mintFee) {
-            revert NeedMoreETHSent();
+            revert RandomIpfsNft__NeedMoreETHSent();
         }
         requestId = i_vrfCoordinator.requestRandomWords(
             i_gasLane,
@@ -101,7 +101,7 @@ contract RandomIpfsNft is ERC721URIStorage, VRFConsumerBaseV2, Ownable {
         if (moddedRng <= 9) return Breed(0);
         else if (moddedRng <= 40) return Breed(1);
         else if (moddedRng <= 99) return Breed(2);
-        else revert RangeOutOfBounds();
+        else revert RandomIpfsNft__RangeOutOfBounds();
     }
 
     function withdraw() public onlyOwner {
