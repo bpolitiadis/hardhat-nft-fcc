@@ -49,7 +49,7 @@ contract RandomIpfsNft is ERC721URIStorage, VRFConsumerBaseV2, Ownable {
         uint256 mintFee,
         uint32 callbackGasLimit,
         string[3] memory dogTokenUris
-    ) VRFConsumerBaseV2(vrfCoordinatorV2) ERC721("Random IPFS Aura NFT", "AURA") {
+    ) VRFConsumerBaseV2(vrfCoordinatorV2) ERC721("Aura NFT", "AVRA") {
         i_vrfCoordinator = VRFCoordinatorV2Interface(vrfCoordinatorV2);
         i_gasLane = gasLane;
         i_subscriptionId = subscriptionId;
