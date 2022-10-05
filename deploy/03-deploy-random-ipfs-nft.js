@@ -83,26 +83,26 @@ async function handleTokenUris() {
         if (files[imageUploadResponseIndex].includes("legendary")){
             tokenUriMetadata.name = "Aura (Legendary)";
             tokenUriMetadata.description = `An adorable Legendary Aura!`;
-            tokenUriMetadata.attributes = {
+            tokenUriMetadata.attributes = [{
                 trait_type: "Cuteness",
                 value: 100,
-            }
+            }]
         }
         else if (files[imageUploadResponseIndex].includes("rare")){
             tokenUriMetadata.name = "Aura (Rare)";
             tokenUriMetadata.description = `An adorable Rare Aura!`;
-            tokenUriMetadata.attributes = {
+            tokenUriMetadata.attributes = [{
                 trait_type: "Cuteness",
                 value: 85,
-            }
+            }]
         }
         else {
             tokenUriMetadata.name = "Aura (Common)";
             tokenUriMetadata.description = `An adorable Common Aura!`;
-            tokenUriMetadata.attributes = {
+            tokenUriMetadata.attributes = [{
                 trait_type: "Cuteness",
                 value: 65,
-            }
+            }]
         }
 
         tokenUriMetadata.image = `ipfs://${imageUploadResponses[imageUploadResponseIndex].IpfsHash}`;
