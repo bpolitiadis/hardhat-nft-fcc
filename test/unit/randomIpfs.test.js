@@ -1,5 +1,3 @@
-// We are going to skimp a bit on these tests...
-
 const { assert, expect } = require("chai");
 const { network, deployments, ethers } = require("hardhat");
 const { developmentChains } = require("../../helper-hardhat-config");
@@ -42,7 +40,6 @@ const { developmentChains } = require("../../helper-hardhat-config");
               });
               it("emits an event and kicks off a random word request", async function () {
                   const fee = await randomIpfsNft.getMintFee();
-                  console.log("FEE ==== "+fee)
                   await expect(randomIpfsNft.requestNft({ value: fee.toString() })).to.emit(
                       randomIpfsNft,
                       "NftRequested"

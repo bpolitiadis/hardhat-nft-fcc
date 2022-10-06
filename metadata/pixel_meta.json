@@ -1,0 +1,11 @@
+{
+    "name": "Pixel",
+    "description": "An adorable Pixel",
+    "image": "ipfs://QmQHVfCVT2dmu4axpza4Cpzr1quRCat17S3S39kbgAdeAH",
+    "attributes": [
+        {
+            "trait_type": "Cuteness",
+            "value": 100
+        }
+    ]
+}
