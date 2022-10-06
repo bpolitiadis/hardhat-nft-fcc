@@ -50,10 +50,6 @@ module.exports = async ({ getNamedAccounts, deployments, ethers, network }) => {
         vrfCoordinatorV2Address = networkConfig[chainId].vrfCoordinatorV2;
         subscriptionId = networkConfig[chainId].subscriptionId;
     }
-    console.log(subscriptionId);
-    console.log(subscriptionId.toNumber());
-    console.log(subscriptionId.toString());
-
     log("----------------------------------------------------");
     arguments = [
         vrfCoordinatorV2Address,
@@ -72,9 +68,9 @@ module.exports = async ({ getNamedAccounts, deployments, ethers, network }) => {
 
     if (chainId == 31337) {
         const vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock");
-        await vrfCoordinatorV2Mock.addConsumer(subscriptionId.toNumber(), randomIpfsNft.address)
-        log("adding consumer...")
-        log("Consumer added!")
+        await vrfCoordinatorV2Mock.addConsumer(subscriptionId.toNumber(), randomIpfsNft.address);
+        log("adding consumer...");
+        log("Consumer added!");
     }
 
     // Verify the deployment
