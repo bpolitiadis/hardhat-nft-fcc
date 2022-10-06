@@ -20,6 +20,11 @@ To deploy the contracts on hardhat localhost
 yarn hardhat deploy
 ```
 To deploy the contracts in Goerli Ethereum Testnet:
-```shel
+```shell
 yarn hardhat deploy --network goerli
+```
+
+To run the project's tests
+```shell
+yarn hardhat test
 ```
